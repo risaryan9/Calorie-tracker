@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cal-AI Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1><span class="icon">🍎</span> Cal AI</h1>
+      <div class="fire-icon">🔥 0</div>
+    </header>
+
+    <div class="calendar">
+      <div class="day">F<br><span>18</span></div>
+      <div class="day">S<br><span>19</span></div>
+      <div class="day">S<br><span>20</span></div>
+      <div class="day">M<br><span>21</span></div>
+      <div class="day">T<br><span>22</span></div>
+      <div class="day active">W<br><span>23</span></div>
+      <div class="day">T<br><span>24</span></div>
+    </div>
+
+    <section class="summary">
+      <h2>1949</h2>
+      <p>Calories left</p>
+      <div class="macros">
+        <div><strong>152g</strong><br>Protein left</div>
+        <div><strong>212g</strong><br>Carbs left</div>
+        <div><strong>54g</strong><br>Fats left</div>
+      </div>
+    </section>
+
+    <section class="recent">
+      <!-- <div class="upload-image-div">
+        <form action="/action_page">
+          <input type="file" id="myFile" name="filename">
+          <input type="submit">
+        </form>
+        <h3>Recently eaten</h3>
+        <button class="upload-button">Upload</button>
+      </div> -->
+
+      <div class="upload-image-div">
+        <input type="file" id="imageInput" accept="image/*" hidden />
+        <label for="imageInput" class="custom-file-label">Choose Image</label>
+        <button class="upload-button" onclick="uploadImage()">Upload</button>
+      </div>
+      <p id="image-chosen">No image chosen</p>
+      <p><strong>You haven't uploaded any food</strong><br>
+      Start tracking today's meals by taking a quick picture</p>
+    </section>
+
+
+
+
+    <nav class="bottom-nav">
+      <a class="active">Home</a>
+      <a>Analytics</a>
+      <a>Settings</a>
+    </nav>
+
+    <button class="fab">+</button>
+  </div>
+
+  <script>
+    const imageInput = document.getElementById('imageInput');
+    const fileLabel = document.getElementById('image-chosen');
+  
+    imageInput.addEventListener('change', function () {
+      if (this.files && this.files.length > 0) {
+        fileLabel.textContent = this.files[0].name;
+      } else {
+        fileLabel.textContent = 'Choose Image';
+      }
+    });
+  </script>
+
+</body>
+</html>
