@@ -3,6 +3,7 @@ import multer from 'multer';
 import fs from 'fs';
 import axios from 'axios';
 import cors from 'cors';
+import parseJSONSafely from './functions.js';
 
 
 const app = express();
@@ -82,14 +83,16 @@ Do not mention that this is an approximation or mention weight-based limitations
     );
 
     const responseText = geminiResponse.data.candidates[0].content.parts[0].text;
-    console.log(responseText)
+    console.log(responseText);
+    console.log(parseJSONSafely(responseText));
+
 
     res.json({ result: responseText });
   } catch (error) {
     console.error('Gemini API Error:', error.response?.data || error.message);
     res.status(500).json({ error: 'Failed to analyze image' });
   } finally {
-    fs.unlinkSync(imagePath); 
+    fs.unlinkSync(imagePath);
   }
 });
 
