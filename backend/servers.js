@@ -5,6 +5,7 @@ import axios from 'axios';
 import cors from 'cors';
 import parseJSONSafely from './functions.js';
 import foodAnalysisPrompt from './prompt.js';
+import cummulatemacros from './cummulatemacros.js';
 
 
 const app = express();
@@ -55,6 +56,8 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
     const responseText = geminiResponse.data.candidates[0].content.parts[0].text;
     console.log(responseText);
     console.log(parseJSONSafely(responseText));
+    console.log(cummulatemacros(parseJSONSafely(responseText)))
+
 
 
     res.json({ result: responseText });
