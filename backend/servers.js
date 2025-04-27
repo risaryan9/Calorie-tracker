@@ -60,7 +60,7 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
 
 
 
-    res.json({ result: responseText });
+    res.json({ result: responseText, cummulatedMacros: cummulatemacros(parseJSONSafely(responseText)) });
   } catch (error) {
     console.error('Gemini API Error:', error.response?.data || error.message);
     res.status(500).json({ error: 'Failed to analyze image' });

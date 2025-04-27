@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-async function uploadImage(file, setResponse) {
+async function uploadImage(file, setResponse, onMacrosUpdate) {
   if (!file) return alert("Please choose an image");
 
   const formData = new FormData();
@@ -12,7 +12,9 @@ async function uploadImage(file, setResponse) {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
     console.log('Gemini Response:', res.data.result);
+    console.log(`Cummulate macros: from upload component ${res.data.cummulatedMacros}`)
     setResponse(res.data.result);
+    onMacrosUpdate(res.data.cummulatedMacros);  
 
   } catch (err) {
     console.error(err);
@@ -20,7 +22,7 @@ async function uploadImage(file, setResponse) {
   }
 }
 
-function Upload() {
+function Upload(props) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [response, setResponse] = useState(null);
   const [displayFileName, setDisplayFileName] = useState('No image chosen');
@@ -36,7 +38,7 @@ function Upload() {
   const handleUploadClick = async () => {
     setUploadName("Processing..");
     setUploadDesc("Working on it! Please hold tight for just a second.")
-    await uploadImage(selectedFile, setResponse);
+    await uploadImage(selectedFile, setResponse, props.onMacrosUpdate); 
     setDisplayFileName('No image chosen');
     setUploadName("Your meals will appear here:");
     setUploadDesc("Start tracking today's meals by taking a quick picture")

@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function Dashboard(props) {
     return (
         <section className="summary">
@@ -13,6 +14,5 @@ function Dashboard(props) {
         </section>
     );
 }
-
 
 export default Dashboard;

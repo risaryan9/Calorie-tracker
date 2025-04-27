@@ -8,30 +8,45 @@ import Upload from './Upload'
 
 
 
-function App(){
-  const [nutritionData, setNutritionData] = useState({
+function App() {
+  // Initial daily goals
+  const initialGoals = {
     calories: 1949,
     protein: 152,
     carbs: 212,
     fats: 54
-  });
+  };
 
+  const [remaining, setRemaining] = useState(initialGoals);
 
-  return(
+  const handleMacrosUpdate = (macrosArray) => {
+    if (!macrosArray || !Array.isArray(macrosArray)) return;
+    
+    // Array format: [calories, fats, protein, carbs]
+    const [consumedCalories, consumedFats, consumedProtein, consumedCarbs] = macrosArray;
+    
+    setRemaining(prev => ({
+      calories: Math.max(0, prev.calories - consumedCalories),
+      protein: Math.max(0, prev.protein - consumedProtein),
+      carbs: Math.max(0, prev.carbs - consumedCarbs),
+      fats: Math.max(0, prev.fats - consumedFats)
+    }));
+  };
+
+  return (
     <div className='app'>
       <Header />
       <Calendar />
       <Dashboard 
-        calories={nutritionData.calories}
-        protein={nutritionData.protein}
-        carbs={nutritionData.carbs}
-        fats={nutritionData.fats}
+        calories={remaining.calories}
+        protein={remaining.protein}
+        carbs={remaining.carbs}
+        fats={remaining.fats}
       />
-      <Upload />
+      <Upload onMacrosUpdate={handleMacrosUpdate} />
       <Footer />
     </div>
-  )
+  );
 }
 
-
-export default App
+export default App;
