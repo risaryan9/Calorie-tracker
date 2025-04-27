@@ -18,3 +18,5 @@ async function uploadImage() {
       alert('Failed to process image.');
     }
   }
+
+export default uploadImage;
