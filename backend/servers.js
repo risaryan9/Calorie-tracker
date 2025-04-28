@@ -9,6 +9,8 @@ import cummulatemacros from './cummulatemacros.js';
 
 
 const app = express();
+
+
 const upload = multer({ dest: 'uploads/' });
 app.use(cors());
 
@@ -57,7 +59,6 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
     console.log(responseText);
     console.log(parseJSONSafely(responseText));
     console.log(cummulatemacros(parseJSONSafely(responseText)))
-
 
 
     res.json({ result: responseText, cummulatedMacros: cummulatemacros(parseJSONSafely(responseText)) });

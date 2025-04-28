@@ -6,6 +6,10 @@ body {
   color: #111;
 }
 
+h1{
+  font-size: 1.9rem;
+}
+
 .app {
   max-width: 400px;
   margin: auto;
